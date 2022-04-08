@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>moroboxai-player-web</title>
+    </head>
+    <body style="display: flex; justify-content: center; align-items: center;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div id="player-wrapper" style="display: none; display: flex; flex-direction: column; align-items: center;">
+                <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1em; gap: 10px;">
+                    <input class="serve-button" type="button" value="Directory" data-url="/test/game"/>
+                    <input class="serve-button" type="button" value="Zip" data-url="/test/game.zip"/>
+                </div>
+                <!-- Player is initially hidden until the lib is loaded -->
+                <div
+                    id="player"
+                    class="moroboxai-player"
+                    style="background-color: black; width: 256px; height: 256px; margin-bottom: 1em;"
+                    data-url="/test/game"
+                ></div>
+            </div>
+            <!-- Default message indicating the lib didn't load -->
+            <span id="message" style="font-family: monospace; font-size: 1.5em;">Can't load moroboxai-player-web, see console</span>
+        </div>
+    </body>
+    <script type="text/javascript" src="../lib/index.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Notify we loaded the lib
+            const msg = `moroboxai-player-web v${MoroboxAIPlayer.VERSION}`;
+            document.title = msg;
+            console.log(msg);
+            document.getElementById("message").innerHTML = msg;
+
+            // Bind buttons for choosing the serving method
+            const playerElement = document.getElementById("player");
+            let player = undefined;
+
+            function onServeButton(src) {
+                // Initialize the player
+                console.log(`serve from ${src.value} ${src.dataset.url}`);
+                playerElement.dataset.url = src.dataset.url;
+                player = MoroboxAIPlayer.init(playerElement);
+
+                // Show the player
+                document.getElementById("player-wrapper").style.display = "block";
+            }
+
+            const serveButtons = document.getElementsByClassName("serve-button");
+            for (let i = 0; i < serveButtons.length; ++i) {
+                const serveButton = serveButtons[i];
+                serveButton.onclick = () => onServeButton(serveButton);
+            }
+
+            onServeButton(serveButtons[1]);
+        })();
+    </script>
+</html>
