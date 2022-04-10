@@ -1,6 +1,11 @@
 import JSZip from 'jszip';
 import * as MoroboxAIGameSDK from 'moroboxai-game-sdk';
 
+/**
+ * Fetch data from an URL.
+ * @param {string} url - Remote URL 
+ * @returns {Promise} Data when ready
+ */
 function getUrl(url: string): Promise<string> {
     return fetch(url).then(response => {
         if (!response.ok) {
@@ -22,6 +27,7 @@ export class Server implements MoroboxAIGameSDK.IServer {
     }
 }
 
+// Serve files from remote URL
 export class FileServer extends Server implements MoroboxAIGameSDK.IFileServer {
     private _baseUrl: string;
 
@@ -51,6 +57,7 @@ export class FileServer extends Server implements MoroboxAIGameSDK.IFileServer {
     }
 }
 
+// Serve files from remote zip
 export class ZipServer extends Server implements MoroboxAIGameSDK.IFileServer {
     private _task?: Promise<void>;
     private _zip?: JSZip = undefined;

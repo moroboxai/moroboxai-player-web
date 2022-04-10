@@ -7,20 +7,13 @@ import { FileServer, ZipServer } from './server';
  */
 export const VERSION: string = '0.1.0-alpha.1';
 
-function createFileServer(baseUrl: string): MoroboxAIGameSDK.IFileServer {
-    if (baseUrl.endsWith(".zip")) {
-        return new ZipServer(baseUrl);
-    }
-    
-    return new FileServer(baseUrl);
-}
-
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
-    createFileServer
+    fileServer: (baseUrl: string) => new FileServer(baseUrl),
+    zipServer: (baseUrl: string) => new ZipServer(baseUrl)
 }
 
 /**
- * Gets default configured player options.
+ * Get default configured player options.
  * @returns {IPlayerOptions} Default options
  */
 export function defaultOptions(): MoroboxAIPlayerSDK.IPlayerOptions {

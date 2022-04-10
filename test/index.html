@@ -6,8 +6,9 @@
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div id="player-wrapper" style="display: none; display: flex; flex-direction: column; align-items: center;">
                 <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1em; gap: 10px;">
-                    <input class="serve-button" type="button" value="Directory" data-url="/test/game"/>
+                    <input class="serve-button" type="button" value="Directory" data-url="/node_modules/@moroboxai-games/pixijs-template"/>
                     <input class="serve-button" type="button" value="Zip" data-url="/test/game.zip"/>
+                    <input class="serve-button" type="button" value="JSON" data-url="/test/game/header.json"/>
                 </div>
                 <!-- Player is initially hidden until the lib is loaded -->
                 <div
@@ -35,10 +36,17 @@
             let player = undefined;
 
             function onServeButton(src) {
+                // Remove previous player
+                if (player !== undefined) {
+                    player.remove();
+                    player = undefined;
+                }
+                
                 // Initialize the player
                 console.log(`serve from ${src.value} ${src.dataset.url}`);
                 playerElement.dataset.url = src.dataset.url;
                 player = MoroboxAIPlayer.init(playerElement);
+                player.play();
 
                 // Show the player
                 document.getElementById("player-wrapper").style.display = "block";
@@ -50,7 +58,7 @@
                 serveButton.onclick = () => onServeButton(serveButton);
             }
 
-            onServeButton(serveButtons[1]);
+            onServeButton(serveButtons[0]);
         })();
     </script>
 </html>
