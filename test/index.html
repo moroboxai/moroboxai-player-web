@@ -29,6 +29,26 @@
                 </div>-->
                 <!-- Player is initially hidden until the lib is loaded -->
                 <div id="player" class="moroboxai-player"></div>
+                <input id="load-ai" type="button" value="Load AI" disabled/>
+                <textarea id="code" cols="64" rows="20" disabled>
+// Type your code here
+const input = {right: true, left: false};
+
+function update(state) {
+    console.log(state);
+
+    if (state.x >= 173) {
+        input.right = false;
+        input.left = true;
+    } else if (state.x <= 83) {
+        input.left = false;
+        input.right = true;
+    }
+
+    sendInput(input);
+}
+
+exports.update = update;</textarea>
             </div>
         </div>
     </body>
@@ -41,10 +61,19 @@
             const msg = `moroboxai-player-web v${MoroboxAIPlayer.VERSION}`;
             document.title = msg;
             console.log(msg);
-
-            // Bind buttons for choosing the serving method
+            
+            // Elements
             const playerElement = document.getElementById("player");
+            const codeElement = document.getElementById("code");
+            const loadAIButton = document.getElementById("load-ai");
+
+            // Player instance
             let player = undefined;
+
+            function enableAI(value) {
+                loadAIButton.disabled = !value;
+                codeElement.disabled = !value;
+            }
 
             // Called when selecting a sample to init the player
             function selectSample(link) {
@@ -52,6 +81,7 @@
                 if (player !== undefined) {
                     player.remove();
                     player = undefined;
+                    enableAI(false);
                 }
                 
                 // Initialize the player
@@ -59,6 +89,19 @@
                 player = MoroboxAIPlayer.init(playerElement, {
                     url: `${GAMES_ROOT}${link.dataset.url}`
                 });
+
+                player.ready(() => {
+                    enableAI(true);
+                });
+            }
+
+            // Called when reloading the AI
+            function loadAI() {
+                if (player === undefined) {
+                    return;
+                }
+
+                player.loadAI(codeElement.value);
             }
 
             // Bind navigation links
@@ -68,7 +111,11 @@
                 link.onclick = () => selectSample(link);
             }
 
+            // Bind load ai button
+            loadAIButton.onclick = loadAI;
+
             // Show interface
+            enableAI(false);
             document.getElementById("loading").classList.add("hidden");
             document.getElementById("loaded").classList.remove("hidden");
 
@@ -153,6 +200,10 @@
             width: 256px;
             height: 256px;
             margin-bottom: 1em;
+        }
+
+        #code {
+            margin-top: 1em;
         }
     </style>
 </html>
