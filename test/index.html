@@ -2,40 +2,52 @@
     <head>
         <title>moroboxai-player-web</title>
     </head>
-    <body style="display: flex; justify-content: center; align-items: center;">
-        <div style="display: flex; flex-direction: column; align-items: center;">
-            <div id="player-wrapper" style="display: none; display: flex; flex-direction: column; align-items: center;">
-                <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1em; gap: 10px;">
-                    <input class="serve-button" type="button" value="Directory" data-url="/node_modules/@moroboxai-games/pixijs-template"/>
-                    <input class="serve-button" type="button" value="Zip" data-url="/test/game.zip"/>
-                    <input class="serve-button" type="button" value="JSON" data-url="/test/game/header.json"/>
-                </div>
-                <!-- Player is initially hidden until the lib is loaded -->
-                <div
-                    id="player"
-                    class="moroboxai-player"
-                    style="background-color: black; width: 256px; height: 256px; margin-bottom: 1em;"
-                    data-url="/test/game"
-                ></div>
-            </div>
+    <body>
+        <div id="loading" class="f-v f-a f-j full-height">
             <!-- Default message indicating the lib didn't load -->
-            <span id="message" style="font-family: monospace; font-size: 1.5em;">Can't load moroboxai-player-web, see console</span>
+            <span>Can't load moroboxai-player-web, see console</span>
+        </div>
+        <div id="loaded" class="f-h hidden full-height">
+            <!-- Left navigation bar -->
+            <nav class="full-height">
+                <h2>Samples:</h2>
+                <ul>
+                    <li><a href="#" data-img="pixijs-template/assets/splashart.png" data-url="pixijs-template">PixiJS-Template - Dir</a></li>
+                    <li><a href="#" data-img="pixijs-template/assets/splashart.png" data-url="pixijs-template/game.zip">PixiJS-Template - Zip</a></li>
+                    <li><a href="#" data-img="pixijs-template/assets/splashart.png" data-url="pixijs-template/header.json">PixiJS-Template - Header</a></li>
+                    <li><a href="#" data-img="pong/assets/splashart.png" data-url="pong">Pong</a></li>
+                    <li><a href="#" data-img="skeleton/assets/splashart.png" data-url="skeleton">Skeleton</a></li>
+                    <li><a href="#" data-img="towerdefense/assets/splashart.png" data-url="towerdefense">TowerDefense</a></li>
+                </ul>
+            </nav>
+            <!-- Center interface -->
+            <div class="f-v f-a f-j full-width full-height">
+                <!--<div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1em; gap: 10px;">
+                    <input class="control-button" type="button" value="Directory" data-url="/node_modules/@moroboxai-games/pixijs-template"/>
+                    <input class="control-button" type="button" value="Zip" data-url="/test/game.zip"/>
+                    <input class="control-button" type="button" value="JSON" data-url="/test/game/header.json"/>
+                </div>-->
+                <!-- Player is initially hidden until the lib is loaded -->
+                <div id="player" class="moroboxai-player"></div>
+            </div>
         </div>
     </body>
     <script type="text/javascript" src="../lib/index.js"></script>
     <script type="text/javascript">
         (function() {
+            const GAMES_ROOT = '../node_modules/@moroboxai-games/';
+
             // Notify we loaded the lib
             const msg = `moroboxai-player-web v${MoroboxAIPlayer.VERSION}`;
             document.title = msg;
             console.log(msg);
-            document.getElementById("message").innerHTML = msg;
 
             // Bind buttons for choosing the serving method
             const playerElement = document.getElementById("player");
             let player = undefined;
 
-            function onServeButton(src) {
+            // Called when selecting a sample to init the player
+            function selectSample(link) {
                 // Remove previous player
                 if (player !== undefined) {
                     player.remove();
@@ -43,22 +55,104 @@
                 }
                 
                 // Initialize the player
-                console.log(`serve from ${src.value} ${src.dataset.url}`);
-                playerElement.dataset.url = src.dataset.url;
-                player = MoroboxAIPlayer.init(playerElement);
-                player.play();
-
-                // Show the player
-                document.getElementById("player-wrapper").style.display = "block";
+                playerElement.style.backgroundImage = `url("${GAMES_ROOT}${link.dataset.img}")`;
+                player = MoroboxAIPlayer.init(playerElement, {
+                    url: `${GAMES_ROOT}${link.dataset.url}`
+                });
             }
 
-            const serveButtons = document.getElementsByClassName("serve-button");
-            for (let i = 0; i < serveButtons.length; ++i) {
-                const serveButton = serveButtons[i];
-                serveButton.onclick = () => onServeButton(serveButton);
+            // Bind navigation links
+            const links = document.getElementsByTagName("a");
+            for(let i = 0; i < links.length; ++i) {
+                const link = links[i];
+                link.onclick = () => selectSample(link);
             }
 
-            onServeButton(serveButtons[0]);
+            // Show interface
+            document.getElementById("loading").classList.add("hidden");
+            document.getElementById("loaded").classList.remove("hidden");
+
+            // Select the first sample
+            selectSample(links[0]);
         })();
     </script>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: monospace;
+        }
+
+        .f-v {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .f-h {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .f-a {
+            align-items: center;
+        }
+
+        .f-j {
+            justify-content: center;
+        }
+
+        .full-width {
+            width: 100%;
+        }
+
+        .full-height {
+            min-height: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #loading span {
+            font-family: monospace;
+            font-size: 1.5em;
+        }
+
+        nav {
+            background-color: #34373c;
+            border-right: 2px solid #16181C;
+            width: 18em;
+            margin: 0;
+            padding: 0;
+            padding-left: 2em;
+            padding-top: 2em;
+            font-weight: bold;
+            font-size: 1.25em;
+        }
+
+        h2 {
+            color: white;
+            font-size: 1em;
+        }
+
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .moroboxai-player {
+            background-color: black;
+            background-size: cover;
+            width: 256px;
+            height: 256px;
+            margin-bottom: 1em;
+        }
+    </style>
 </html>
