@@ -81,8 +81,10 @@ exports.update = update;</textarea>
             </div>
         </div>
     </body>
-    <script type="text/javascript" src="../lib/index.js"></script>
-    <script type="text/javascript">
+    <script type="module" src="../lib/index.js"></script>
+    <script type="module">
+        import * as MoroboxAIPlayer from "../lib/index.js";
+        
         (function() {
             const GAMES_ROOT = '../node_modules/@moroboxai-games/';
 
