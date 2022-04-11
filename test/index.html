@@ -29,14 +29,18 @@
                 </div>-->
                 <!-- Player is initially hidden until the lib is loaded -->
                 <div id="player" class="moroboxai-player"></div>
-                <input id="load-ai" type="button" value="Load AI" disabled/>
-                <textarea id="code" cols="64" rows="20" disabled>
+                <!-- Bottom part for coding AI -->
+                <div class="f-h f-a f-j">
+                    <div class="ai-panel f-v f-a f-j">
+                        <div class="f-h f-a f-j">
+                            <input class="ai-load" type="button" value="Load AI" disabled/>
+                            <input class="ai-unload" type="button" value="Unload AI" disabled/>
+                        </div>
+                        <textarea cols="46" rows="20" disabled>
 // Type your code here
 const input = {right: true, left: false};
 
 function update(state) {
-    console.log(state);
-
     if (state.x >= 173) {
         input.right = false;
         input.left = true;
@@ -49,6 +53,31 @@ function update(state) {
 }
 
 exports.update = update;</textarea>
+                    </div>
+                    <div class="ai-panel f-v f-a f-j">
+                        <div class="f-h f-a f-j">
+                            <input class="ai-load" type="button" value="Load AI" disabled/>
+                            <input class="ai-unload" type="button" value="Unload AI" disabled/>
+                        </div>
+                        <textarea cols="46" rows="20" disabled>
+// Type your code here
+const input = {down: true, up: false};
+
+function update(state) {
+    if (state.y >= 173) {
+        input.down = false;
+        input.up = true;
+    } else if (state.y <= 83) {
+        input.up = false;
+        input.down = true;
+    }
+
+    sendInput(input);
+}
+
+exports.update = update;</textarea>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
@@ -65,14 +94,58 @@ exports.update = update;</textarea>
             // Elements
             const playerElement = document.getElementById("player");
             const codeElement = document.getElementById("code");
-            const loadAIButton = document.getElementById("load-ai");
 
             // Player instance
             let player = undefined;
 
+            // Bind AI panels
+            function loadAI(code, controllerId) {
+                if (player === undefined) {
+                    return;
+                }
+
+                const controller = player.controller(controllerId);
+                if (controller !== undefined) {
+                    controller.loadAI(code);
+                }
+            }
+
+            function unloadAI(controllerId) {
+                if (player === undefined) {
+                    return;
+                }
+
+                const controller = player.controller(controllerId);
+                if (controller !== undefined) {
+                    controller.unloadAI();
+                }
+            }
+
+            function AIPanel(root, controllerId) {
+                const loadAIButton = root.getElementsByClassName("ai-load")[0];
+                const unloadAIButton = root.getElementsByClassName("ai-unload")[0];
+                const codeElement = root.getElementsByTagName("textarea")[0];
+
+                loadAIButton.onclick = () => loadAI(codeElement.value, controllerId);
+                unloadAIButton.onclick = () => unloadAI(controllerId);
+
+                return {
+                    enable: function(value) {
+                        loadAIButton.disabled = !value;
+                        unloadAIButton.disabled = !value;
+                        codeElement.disabled = !value;
+                    }
+                }
+            }
+
+            const aiPanels = [];
+            const aiPanelElements = document.getElementsByClassName("ai-panel");
+            for(let i = 0; i < aiPanelElements.length; ++i) {
+                aiPanels.push(new AIPanel(aiPanelElements[i], i));
+            }
+
             function enableAI(value) {
-                loadAIButton.disabled = !value;
-                codeElement.disabled = !value;
+                aiPanels.forEach(_ => _.enable(value));
             }
 
             // Called when selecting a sample to init the player
@@ -90,18 +163,9 @@ exports.update = update;</textarea>
                     url: `${GAMES_ROOT}${link.dataset.url}`
                 });
 
-                player.ready(() => {
+                player.onReady = () => {
                     enableAI(true);
-                });
-            }
-
-            // Called when reloading the AI
-            function loadAI() {
-                if (player === undefined) {
-                    return;
-                }
-
-                player.loadAI(codeElement.value);
+                };
             }
 
             // Bind navigation links
@@ -110,9 +174,6 @@ exports.update = update;</textarea>
                 const link = links[i];
                 link.onclick = () => selectSample(link);
             }
-
-            // Bind load ai button
-            loadAIButton.onclick = loadAI;
 
             // Show interface
             enableAI(false);
@@ -199,11 +260,19 @@ exports.update = update;</textarea>
             background-size: cover;
             width: 256px;
             height: 256px;
-            margin-bottom: 1em;
+            margin-bottom: 2em;
         }
 
-        #code {
+        .ai-panel textarea {
             margin-top: 1em;
+        }
+
+        .ai-panel + .ai-panel {
+            margin-left: 1em;
+        }
+
+        .ai-panel input + input {
+            margin-left: 1em;
         }
     </style>
 </html>
