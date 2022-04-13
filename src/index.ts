@@ -2,6 +2,8 @@ import * as MoroboxAIGameSDK from 'moroboxai-game-sdk';
 import * as MoroboxAIPlayerSDK from 'moroboxai-player-sdk';
 import { FileServer, ZipServer } from './server';
 
+export { IMoroboxAIPlayer } from 'moroboxai-player-sdk';
+
 /**
  * Version of the player.
  */
