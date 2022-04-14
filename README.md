@@ -29,12 +29,18 @@ Create an `index.html` file in the `moroboxai-player-web` folder:
 
 ```html
 <html>
- <div id="player" style="width: 256px; height: 256px;"></div> 
+ <div id="player"></div> 
   
  <script type="text/javascript" src="./lib/umd/moroboxai-player-web.js"></script>
  <script type="text/javascript">
   // Initialize the player on our div
-  const player = MoroboxAIPlayer.init(document.getElementById("player"));
+  const player = MoroboxAIPlayer.init({
+   element: document.getElementById("player"),
+   url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pixijs-template/",
+   splashart: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pixijs-template/assets/splashart.png",
+   width: "256px",
+   height: "256px"
+  );
 
   // Will be called when the game is ready
   player.onReady = () => console.log("game is loaded and ready");
@@ -49,7 +55,7 @@ You can also import the lib as an ECMAScript module:
 
 ```html
 <html>
- <div id="player" style="width: 256px; height: 256px;"></div> 
+ <div id="player"></div> 
  
  <script type="module" src="./lib/es/index.js"></script>
  <script type="module">
