@@ -7,7 +7,7 @@ export { IMoroboxAIPlayer } from 'moroboxai-player-sdk';
 /**
  * Version of the player.
  */
-export const VERSION: string = '0.1.0-alpha.3';
+export const VERSION: string = '0.1.0-alpha.4';
 
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
     fileServer: (baseUrl: string) => new FileServer(baseUrl),
@@ -22,8 +22,8 @@ export function defaultOptions(): MoroboxAIPlayerSDK.IPlayerOptions {
     return MoroboxAIPlayerSDK.defaultOptions();
 }
 
-export function init() : void;
-export function init(options: MoroboxAIPlayerSDK.IPlayerOptions) : void;
+export function init() : MoroboxAIPlayerSDK.IMoroboxAIPlayer | MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
+export function init(options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IMoroboxAIPlayer | MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
 export function init(element: Element) : MoroboxAIPlayerSDK.IMoroboxAIPlayer;
 export function init(element: Element[] | HTMLCollectionOf<Element>) : MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
 export function init(element: Element, options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IMoroboxAIPlayer;
