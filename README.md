@@ -11,7 +11,7 @@ Player for running MoroboxAI games on the web.
 Using npm:
 
 ```bash
-npm i --save-dev moroboxai-player-web
+npm install moroboxai-player-web --save
 ```
 
 Or:
