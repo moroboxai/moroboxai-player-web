@@ -7,7 +7,7 @@ export { IMoroboxAIPlayer } from 'moroboxai-player-sdk';
 /**
  * Version of the player.
  */
-export const VERSION: string = '0.1.0-alpha.1';
+export const VERSION: string = '0.1.0-alpha.3';
 
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
     fileServer: (baseUrl: string) => new FileServer(baseUrl),
