@@ -1,7 +1,7 @@
 # moroboxai-player-web
 
-[![NPM version](https://img.shields.io/npm/v/moroboxai-game-sdk.svg)](https://www.npmjs.com/package/moroboxai-game-sdk)
-![Node.js CI](https://github.com/moroboxai/moroboxai-game-sdk/workflows/Node.js%20CI/badge.svg)
+[![NPM version](https://img.shields.io/npm/v/moroboxai-player-web.svg)](https://www.npmjs.com/package/moroboxai-player-web)
+![Node.js CI](https://github.com/moroboxai/moroboxai-player-web/workflows/Node.js%20CI/badge.svg)
 [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/moroboxai/moroboxai-player-web/blob/master/LICENSE)
 
 Player for running MoroboxAI games on the web.
