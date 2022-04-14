@@ -81,12 +81,14 @@ exports.update = update;</textarea>
             </div>
         </div>
     </body>
-    <script type="module" src="../lib/index.js"></script>
-    <script type="module">
-        import * as MoroboxAIPlayer from "../lib/index.js";
+    <!--<script type="module" src="../lib/es/index.js"></script>-->
+    <!--<script type="module">
+        import * as MoroboxAIPlayer from "../lib/es/index.js";-->
         
+    <script type="text/javascript" src="../lib/umd/moroboxai-player-web.min.js"></script>
+    <script type="text/javascript">
         (function() {
-            const GAMES_ROOT = '../node_modules/@moroboxai-games/';
+            const GAMES_ROOT = 'node_modules/@moroboxai-games/';
 
             // Notify we loaded the lib
             const msg = `moroboxai-player-web v${MoroboxAIPlayer.VERSION}`;
