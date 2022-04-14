@@ -1,6 +1,6 @@
 {
   "name": "moroboxai-player-web",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "MoroboxAI SDK for embedding games in browser",
   "author": "moroboxai",
   "main": "./lib/es/index.js",
