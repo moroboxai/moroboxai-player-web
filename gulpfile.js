@@ -88,3 +88,5 @@ gulp.task('umd', () => {
 });
 
 gulp.task('build', gulp.series('cjs', 'es', 'umd-dev', 'umd'));
+
+gulp.task('dev', gulp.series('umd-dev'));

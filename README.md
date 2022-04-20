@@ -25,7 +25,7 @@ npm run build
 
 ## Usage
 
-Create an `index.html` file in the `moroboxai-player-web` folder:
+Create a `sample.html` file in the `moroboxai-player-web` folder:
 
 ```html
 <html>
@@ -66,7 +66,7 @@ You can also import the lib as an ECMAScript module:
 </html>
 ```
 
-Open `index.html` in your browser and check the console output.
+Open `sample.html` in your browser and check the console output.
 
 ## License
 
