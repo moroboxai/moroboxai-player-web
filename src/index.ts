@@ -1,5 +1,6 @@
 import * as MoroboxAIGameSDK from 'moroboxai-game-sdk';
 import * as MoroboxAIPlayerSDK from 'moroboxai-player-sdk';
+import { InputController } from './controller';
 import { FileServer, ZipServer } from './server';
 
 export { IMoroboxAIPlayer } from 'moroboxai-player-sdk';
@@ -9,7 +10,9 @@ export { IMoroboxAIPlayer } from 'moroboxai-player-sdk';
  */
 export const VERSION: string = '0.1.0-alpha.4';
 
+
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
+    inputController: () => new InputController(),
     fileServer: (baseUrl: string) => new FileServer(baseUrl),
     zipServer: (baseUrl: string) => new ZipServer(baseUrl)
 }
