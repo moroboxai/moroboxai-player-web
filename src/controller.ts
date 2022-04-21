@@ -22,18 +22,26 @@ export class InputController implements IInputController {
 
     private _onKey(ev: KeyboardEvent, value: boolean) {
         if (ev.code === 'ArrowDown' || ev.code === 'KeyS') {
+            if (ev.code === 'ArrowDown') {
+                ev.preventDefault();
+            }
             this._inputs.down = value;
         } else if (ev.code === 'ArrowUp' || ev.code === 'KeyW') {
+            if (ev.code === 'ArrowUp') {
+                ev.preventDefault();
+            }
             this._inputs.up = value;
         } else if (ev.code === 'ArrowLeft' || ev.code === 'KeyA') {
+            if (ev.code === 'ArrowLeft') {
+                ev.preventDefault();
+            }
             this._inputs.left = value;
         } else if (ev.code === 'ArrowRight' || ev.code === 'KeyD') {
+            if (ev.code === 'ArrowRight') {
+                ev.preventDefault();
+            }
             this._inputs.right = value;
-        } else {
-            return;
         }
-
-        ev.preventDefault();
     }
 
     remove() {
