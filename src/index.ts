@@ -1,14 +1,13 @@
-import * as MoroboxAIGameSDK from 'moroboxai-game-sdk';
 import * as MoroboxAIPlayerSDK from 'moroboxai-player-sdk';
 import { InputController } from './controller';
 import { FileServer, ZipServer } from './server';
 
-export { IMoroboxAIPlayer } from 'moroboxai-player-sdk';
+export { IPlayer } from 'moroboxai-player-sdk';
 
 /**
  * Version of the player.
  */
-export const VERSION: string = '0.1.0-alpha.4';
+export const VERSION: string = '0.1.0-alpha.5';
 
 
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
@@ -25,19 +24,19 @@ export function defaultOptions(): MoroboxAIPlayerSDK.IPlayerOptions {
     return MoroboxAIPlayerSDK.defaultOptions();
 }
 
-export function init() : MoroboxAIPlayerSDK.IMoroboxAIPlayer | MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
-export function init(options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IMoroboxAIPlayer | MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
-export function init(element: Element) : MoroboxAIPlayerSDK.IMoroboxAIPlayer;
-export function init(element: Element[] | HTMLCollectionOf<Element>) : MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
-export function init(element: Element, options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IMoroboxAIPlayer;
-export function init(element: Element[] | HTMLCollectionOf<Element>, options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
-export function init(element?: MoroboxAIPlayerSDK.IPlayerOptions | Element | Element[] | HTMLCollectionOf<Element>, options?: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IMoroboxAIPlayer | MoroboxAIPlayerSDK.IMoroboxAIPlayer[];
+export function init() : MoroboxAIPlayerSDK.IPlayer | MoroboxAIPlayerSDK.IPlayer[];
+export function init(options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IPlayer | MoroboxAIPlayerSDK.IPlayer[];
+export function init(element: Element) : MoroboxAIPlayerSDK.IPlayer;
+export function init(element: Element[] | HTMLCollectionOf<Element>) : MoroboxAIPlayerSDK.IPlayer[];
+export function init(element: Element, options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IPlayer;
+export function init(element: Element[] | HTMLCollectionOf<Element>, options: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IPlayer[];
+export function init(element?: MoroboxAIPlayerSDK.IPlayerOptions | Element | Element[] | HTMLCollectionOf<Element>, options?: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IPlayer | MoroboxAIPlayerSDK.IPlayer[];
 
 /**
  * Initialize player on one or multiple HTML elements.
  * @param {HTMLElement} element Element to wrap
  * @param {IPlayerOptions} options Options for initializing the player
  */
-export function init(element?: MoroboxAIPlayerSDK.IPlayerOptions | Element | Element[] | HTMLCollectionOf<Element>, options?: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IMoroboxAIPlayer | MoroboxAIPlayerSDK.IMoroboxAIPlayer[] {
+export function init(element?: MoroboxAIPlayerSDK.IPlayerOptions | Element | Element[] | HTMLCollectionOf<Element>, options?: MoroboxAIPlayerSDK.IPlayerOptions) : MoroboxAIPlayerSDK.IPlayer | MoroboxAIPlayerSDK.IPlayer[] {
     return MoroboxAIPlayerSDK.init(sdkConfig, element, options);
 }
