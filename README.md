@@ -53,6 +53,19 @@ Create a `sample.html` file in the `moroboxai-player-web` folder:
 
 Open `sample.html` in your browser and check the console output.
 
+## Arguments
+
+| Name   |      Type      |  Default |  Description |
+|:----------|:-------------|:------|:------|
+| element | Element || DOM element to attach the player to |
+| url | string || URL of the game |
+| splashart | string || URL of the placeholder image displayed before the game is loaded |
+| width | string || Width of the `div` element |
+| height | string || Height of the `div` element |
+| autoPlay | boolean | false | Auto play the game after the player is initialized |
+| speed | number | 1 | Speed of the game |
+| onReady | func | noop | **Signature: function() => void** <br/> Function called when the game is loaded and ready |
+
 ## License
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
