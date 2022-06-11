@@ -4,7 +4,7 @@
 ![Node.js CI](https://github.com/moroboxai/moroboxai-player-web/workflows/Node.js%20CI/badge.svg)
 [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/moroboxai/moroboxai-player-web/blob/master/LICENSE)
 
-Embeddable player for running MoroboxAI games on the web.
+Embeddable player for running [MoroboxAI](https://github.com/moroboxai) games on the web.
 
 ## Install
 
