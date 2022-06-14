@@ -38,8 +38,8 @@ Create a `sample.html` file in the `moroboxai-player-web` folder:
    element: document.getElementById("player"),
    url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pong/",
    splashart: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pong/assets/splashart.png",
-   width: "256px",
-   height: "256px"
+   width: 256,
+   height: 256
   });
 
   // Will be called when the game is ready
@@ -60,8 +60,9 @@ Open `sample.html` in your browser and check the console output.
 | element | Element || DOM element to attach the player to |
 | url | string || URL of the game |
 | splashart | string || URL of the placeholder image displayed before the game is loaded |
-| width | string || Width of the `div` element |
-| height | string || Height of the `div` element |
+| width | number || Width of the `div` element |
+| height | number || Height of the `div` element |
+| resizable | boolean | true | If the game can resize the player |
 | autoPlay | boolean | false | Auto play the game after the player is initialized |
 | speed | number | 1 | Speed of the game |
 | onReady | func | noop | **Signature: function() => void** <br/> Function called when the game is loaded and ready |
