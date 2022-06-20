@@ -18,7 +18,7 @@ function getUrl(url: string): Promise<string> {
     });
 }
 
-export class Server implements MoroboxAIGameSDK.IServer {
+export abstract class Server implements MoroboxAIGameSDK.IServer {
     ready(callback: () => void): void {
         throw new Error('Method not implemented.');
     }

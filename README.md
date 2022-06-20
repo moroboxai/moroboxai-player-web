@@ -69,6 +69,62 @@ Open `sample.html` in your browser and check the console output.
 | speed | number | 1 | Speed of the game |
 | onReady | func | noop | **Signature: function() => void** <br/> Function called when the game is loaded and ready |
 
+## Pause
+
+```js
+const player = MoroboxAIPlayer.init({...});
+
+pauseButton.onclick = () => player.pause();
+playButton.onclick = () => player.play();
+```
+
+## Stop
+
+```js
+const player = MoroboxAIPlayer.init({...});
+
+stopButton.onclick = () => player.stop();
+```
+
+## Reload
+
+```js
+const player = MoroboxAIPlayer.init({...});
+
+reloadButton.onclick = () => player.reload();
+```
+
+## Stop & Load another game
+
+```js
+const player = MoroboxAIPlayer.init({...});
+
+button.onclick = () => player.play("http://url/to/game");
+```
+
+## Resize
+
+```js
+const player = MoroboxAIPlayer.init({...});
+player.width = 128;
+player.height = 128;
+player.resize({width: 256, height: 256});
+```
+
+## Change speed
+
+```js
+const player = MoroboxAIPlayer.init({...});
+player.speed = 2;
+```
+
+## Cleanup
+
+```js
+const player = MoroboxAIPlayer.init({...});
+player.remove();
+```
+
 ## License
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
