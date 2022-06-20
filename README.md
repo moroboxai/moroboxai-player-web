@@ -16,24 +16,13 @@ Using npm:
 npm install moroboxai-player-web --save
 ```
 
-Or:
-
-```bash
-git clone https://github.com/moroboxai/moroboxai-player-web.git
-cd moroboxai-player-web
-npm i
-npm run build
-```
-
 ## Usage
-
-Create a `sample.html` file in the `moroboxai-player-web` folder:
 
 ```html
 <html>
  <div id="player"></div> 
   
- <script type="text/javascript" src="./lib/umd/moroboxai-player-web.js"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moroboxai-player-web/lib/umd/moroboxai-player-web.min.js"></script>
  <script type="text/javascript">
   // Initialize the player on our div
   const player = MoroboxAIPlayer.init({
@@ -52,8 +41,6 @@ Create a `sample.html` file in the `moroboxai-player-web` folder:
  </script>
 </html>
 ```
-
-Open `sample.html` in your browser and check the console output.
 
 ## Arguments
 
