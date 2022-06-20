@@ -61,6 +61,7 @@ Open `sample.html` in your browser and check the console output.
 |:----------|:-------------|:------|:------|
 | element | Element || DOM element to attach the player to |
 | url | string || URL of the game |
+| header | object || Game header |
 | splashart | string || URL of the placeholder image displayed before the game is loaded |
 | width | number || Width of the `div` element |
 | height | number || Height of the `div` element |
