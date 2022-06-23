@@ -1,9 +1,9 @@
 {
   "name": "moroboxai-player-web",
-  "version": "0.1.0-alpha.11",
+  "version": "0.1.0-alpha.12",
   "description": "MoroboxAI SDK for embedding games in browser",
   "author": "moroboxai",
-  "main": "./lib/cjs/index.js",
+  "main": "./lib/cjs/index.cjs",
   "module": "./lib/es/index.js",
   "unpkg": "./lib/umd/moroboxai-player-web.min.js",
   "jsdelivr": "./lib/umd/moroboxai-player-web.min.js",

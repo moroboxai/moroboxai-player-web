@@ -30,15 +30,9 @@ const webpackConfig = (lib, output, options, library, prod) => ({
 
 gulp.task('cjs', () => {	
 	return gulp.src('./src/index.ts')
-        .pipe(ts.createProject('tsconfig.json')())
-        .pipe(gulp.dest('lib/cjs'));
-});
-
-gulp.task('es', () => {	
-	return gulp.src('./src/index.ts')
         .pipe(gulpWebpack(webpackConfig(
             'lib/es',
-            'index.js',
+            'index.cjs',
             {
                 experiments: {
                     outputModule: true
@@ -46,11 +40,17 @@ gulp.task('es', () => {
             },
             {
                 library: {
-                    type: "module"
+                    type: "commonjs"
                 }
             },
             true
         ), webpack))
+        .pipe(gulp.dest('lib/cjs'));
+});
+
+gulp.task('es', () => {	
+	return gulp.src('./src/**/*.ts')
+        .pipe(ts.createProject('tsconfig.json')())
         .pipe(gulp.dest('lib/es'));
 });
 
