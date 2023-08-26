@@ -4,10 +4,10 @@ import * as MoroboxAIPlayerSDK from "moroboxai-player-sdk";
 // Controller for handling player inputs
 export class InputController implements MoroboxAIPlayerSDK.IInputController {
     private _inputs: MoroboxAIGameSDK.IInputs = {
+        left: false,
+        right: false,
         up: false,
         down: false,
-        left: false,
-        right: false
     };
 
     private _keyDownListener: (ev: KeyboardEvent) => void;
@@ -50,7 +50,7 @@ export class InputController implements MoroboxAIPlayerSDK.IInputController {
         document.removeEventListener('keyup', this._keyUpListener);
     }
 
-    inputs(state: object): MoroboxAIGameSDK.IInputs {
+    get inputs(): MoroboxAIGameSDK.IInputs {
         return this._inputs;
     }
 }
