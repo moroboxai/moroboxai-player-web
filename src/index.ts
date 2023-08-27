@@ -7,7 +7,7 @@ export { IPlayer } from 'moroboxai-player-sdk';
 /**
  * Version of the player.
  */
-export const VERSION: string = '0.1.0-alpha.17';
+export const VERSION: string = '0.1.0-alpha.18';
 
 
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
