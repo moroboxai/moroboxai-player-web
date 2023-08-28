@@ -1,6 +1,6 @@
 {
   "name": "moroboxai-player-web",
-  "version": "0.1.0-alpha.18",
+  "version": "0.1.0-alpha.19",
   "description": "MoroboxAI SDK for embedding games in browser",
   "author": "moroboxai",
   "main": "./lib/cjs/index.cjs",
@@ -36,10 +36,10 @@
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
     "webpack-stream": "^7.0.0",
-    "moroboxai-game-sdk": "^0.1.0-alpha.25"
+    "moroboxai-game-sdk": "^0.1.0-alpha.27"
   },
   "dependencies": {
     "jszip": "^3.9.1",
-    "moroboxai-player-sdk": "^0.1.0-alpha.16"
+    "moroboxai-player-sdk": "^0.1.0-alpha.19"
   }
 }
