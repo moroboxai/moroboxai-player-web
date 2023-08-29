@@ -1,281 +1,102 @@
 <html>
-    <head>
-        <title>moroboxai-player-web</title>
-    </head>
-    <body>
-        <div id="loading" class="f-v f-a f-j full-height">
-            <!-- Default message indicating the lib didn't load -->
-            <span>Can't load moroboxai-player-web, see console</span>
-        </div>
-        <div id="loaded" class="f-h hidden full-height">
-            <!-- Left navigation bar -->
-            <nav class="full-height">
-                <h2>Samples:</h2>
-                <ul>
-                    <li><a href="#" data-img="pong/assets/splashart.png" data-url="pong">PixiJS-Template - Dir</a></li>
-                    <li><a href="#" data-img="pixijs-template/assets/splashart.png" data-url="pixijs-template/game.zip">PixiJS-Template - Zip</a></li>
-                    <li><a href="#" data-img="pixijs-template/assets/splashart.png" data-url="pixijs-template/header.json">PixiJS-Template - Header</a></li>
-                    <li><a href="#" data-img="pong/assets/splashart.png" data-url="pong">Pong</a></li>
-                    <li><a href="#" data-img="skeleton/assets/splashart.png" data-url="skeleton">Skeleton</a></li>
-                    <li><a href="#" data-img="towerdefense/assets/splashart.png" data-url="towerdefense">TowerDefense</a></li>
-                </ul>
-            </nav>
-            <!-- Center interface -->
-            <div class="f-v f-a f-j full-width full-height">
-                <!--<div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 1em; gap: 10px;">
-                    <input class="control-button" type="button" value="Directory" data-url="/node_modules/@moroboxai-games/pixijs-template"/>
-                    <input class="control-button" type="button" value="Zip" data-url="/test/game.zip"/>
-                    <input class="control-button" type="button" value="JSON" data-url="/test/game/header.json"/>
-                </div>-->
-                <!-- Player is initially hidden until the lib is loaded -->
-                <div id="player" class="moroboxai-player"></div>
-                <!-- Bottom part for coding AI -->
-                <div class="f-h f-a f-j">
-                    <div class="ai-panel f-v f-a f-j">
-                        <div class="f-h f-a f-j">
-                            <input class="ai-load" type="button" value="Load AI" disabled/>
-                            <input class="ai-unload" type="button" value="Unload AI" disabled/>
-                        </div>
-                        <textarea cols="46" rows="20" disabled>
-// Type your code here
-const input = {right: true, left: false};
 
-function update(state) {
-    if (state.x >= 173) {
-        input.right = false;
-        input.left = true;
-    } else if (state.x <= 83) {
-        input.left = false;
-        input.right = true;
+<head>
+    <title>MoroboxAIPlayer Sample</title>
+    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-game-sdk@latest/lib/umd/moroboxai-game-sdk.min.js in production -->
+    <script type="text/javascript" src="./node_modules/moroboxai-game-sdk/lib/umd/moroboxai-game-sdk.js"></script>
+    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-player-sdk@latest/lib/umd/moroboxai-player-sdk.min.js in production -->
+    <script type="text/javascript" src="./node_modules/moroboxai-player-sdk/lib/umd/moroboxai-player-sdk.js"></script>
+    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-player-web@latest/lib/umd/moroboxai-player-web.min.js in production -->
+    <script type="text/javascript" src="./lib/umd/moroboxai-player-web.js"></script>
+    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-editor-sdk@latest/lib/umd/moroboxai-editor-sdk.min.js in production -->
+    <script type="text/javascript" src="./node_modules/moroboxai-editor-sdk/lib/umd/moroboxai-editor-sdk.js"></script>
+    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-editor-web@latest/lib/umd/moroboxai-editor-web.min.js in production -->
+    <script type="text/javascript" src="./node_modules/moroboxai-editor-web/lib/umd/moroboxai-editor-web.js"></script>
+    <!-- For running the sample game -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/piximoroxel8ai@latest/lib/umd/piximoroxel8ai.js"></script>
+</head>
+
+<body>
+    <div class="vertical">
+        <div class="horizontal">
+            <div id="player"></div>
+            <div id="editor"></div>
+        </div>
+        <div id="info">
+            <div>moroboxai-game-sdk v<span id="moroboxai-game-sdk-version"></span></div>
+            <div>moroboxai-player-sdk v<span id="moroboxai-player-sdk-version"></span></div>
+            <div>moroboxai-player-web v<span id="moroboxai-player-web-version"></span></div>
+            <div>moroboxai-editor-sdk v<span id="moroboxai-editor-sdk-version"></span></div>
+            <div>moroboxai-editor-web v<span id="moroboxai-editor-web-version"></span></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    (function () {
+        document.getElementById("moroboxai-game-sdk-version").innerText = MoroboxAIGameSDK.VERSION;
+        document.getElementById("moroboxai-player-sdk-version").innerText = MoroboxAIPlayerSDK.VERSION;
+        document.getElementById("moroboxai-player-web-version").innerText = MoroboxAIPlayer.VERSION;
+        document.getElementById("moroboxai-editor-sdk-version").innerText = MoroboxAIEditorSDK.VERSION;
+        document.getElementById("moroboxai-editor-web-version").innerText = MoroboxAIEditor.VERSION;
+
+        player = MoroboxAIPlayer.init(document.getElementById("player"), {
+            // Replace with URL to your header.yml
+            url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/piximoroxel8ai-sample/sample/header.yml",
+            resizable: false,
+            autoPlay: true,
+            width: 256,
+            height: 256,
+            onReady: () => console.log("ready")
+        });
+
+        MoroboxAIEditor.init({
+            element: document.getElementById("editor"),
+            url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/piximoroxel8ai-sample/sample/agent.js",
+            width: "500px",
+            height: "400px",
+            onLoad: (language, value) => player.getController(0).loadAgent({
+                language: language,
+                code: value
+            }),
+            onUnload: () => player.getController(0).unloadAgent()
+        })
+    })();
+</script>
+
+<style type="text/css">
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
     }
 
-    sendInput(input);
-}
-
-exports.update = update;</textarea>
-                    </div>
-                    <div class="ai-panel f-v f-a f-j">
-                        <div class="f-h f-a f-j">
-                            <input class="ai-load" type="button" value="Load AI" disabled/>
-                            <input class="ai-unload" type="button" value="Unload AI" disabled/>
-                        </div>
-                        <textarea cols="46" rows="20" disabled>
-// Type your code here
-const input = {down: true, up: false};
-
-function update(state) {
-    if (state.y >= 173) {
-        input.down = false;
-        input.up = true;
-    } else if (state.y <= 83) {
-        input.up = false;
-        input.down = true;
+    .vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
-    sendInput(input);
-}
+    .horizontal {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 
-exports.update = update;</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-    <!--<script type="module" src="../lib/es/index.js"></script>-->
-    <!--<script type="module">
-        import * as MoroboxAIPlayer from "../lib/es/index.js";-->
-        
-    <script type="text/javascript" src="../lib/umd/moroboxai-player-web.js"></script>
-    <script type="text/javascript">
-        (function() {
-            const GAMES_ROOT = 'https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/';
+    #player {
+        background-color: black;
+        background-size: cover;
+        width: 256px;
+        height: 256px;
+        margin-left: 10em;
+        margin-right: 2em;
+    }
 
-            // Notify we loaded the lib
-            const msg = `moroboxai-player-web v${MoroboxAIPlayer.VERSION}`;
-            document.title = msg;
-            console.log(msg);
-            
-            // Elements
-            const playerElement = document.getElementById("player");
+    #info {
+        margin-top: 2em;
+        text-align: center;
+    }
+</style>
 
-            // Player instance
-            let player = undefined;
-
-            // Bind AI panels
-            function loadAI(code, controllerId) {
-                if (player === undefined) {
-                    return;
-                }
-
-                const controller = player.controller(controllerId);
-                if (controller !== undefined) {
-                    controller.loadAI(code);
-                }
-            }
-
-            function unloadAI(controllerId) {
-                if (player === undefined) {
-                    return;
-                }
-
-                const controller = player.controller(controllerId);
-                if (controller !== undefined) {
-                    controller.unloadAI();
-                }
-            }
-
-            function AIPanel(root, controllerId) {
-                const loadAIButton = root.getElementsByClassName("ai-load")[0];
-                const unloadAIButton = root.getElementsByClassName("ai-unload")[0];
-                const codeElement = root.getElementsByTagName("textarea")[0];
-
-                loadAIButton.onclick = () => loadAI(codeElement.value, controllerId);
-                unloadAIButton.onclick = () => unloadAI(controllerId);
-
-                return {
-                    enable: function(value) {
-                        loadAIButton.disabled = !value;
-                        unloadAIButton.disabled = !value;
-                        codeElement.disabled = !value;
-                    }
-                }
-            }
-
-            const aiPanels = [];
-            const aiPanelElements = document.getElementsByClassName("ai-panel");
-            for(let i = 0; i < aiPanelElements.length; ++i) {
-                aiPanels.push(new AIPanel(aiPanelElements[i], i));
-            }
-
-            function enableAI(value) {
-                aiPanels.forEach(_ => _.enable(value));
-            }
-
-            // Called when selecting a sample to init the player
-            function selectSample(link) {
-                // Remove previous player
-                if (player !== undefined) {
-                    player.remove();
-                    player = undefined;
-                    enableAI(false);
-                }
-                
-                // Initialize the player
-                playerElement.style.backgroundImage = `url("${GAMES_ROOT}${link.dataset.img}")`;
-                player = MoroboxAIPlayer.init(playerElement, {
-                    url: `${GAMES_ROOT}${link.dataset.url}`
-                });
-
-                player.onReady = () => {
-                    enableAI(true);
-                };
-            }
-
-            // Bind navigation links
-            const links = document.getElementsByTagName("a");
-            for(let i = 0; i < links.length; ++i) {
-                const link = links[i];
-                link.onclick = () => selectSample(link);
-            }
-
-            // Show interface
-            enableAI(false);
-            document.getElementById("loading").classList.add("hidden");
-            document.getElementById("loaded").classList.remove("hidden");
-
-            // Select the first sample
-            selectSample(links[0]);
-        })();
-    </script>
-
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: monospace;
-        }
-
-        .f-v {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .f-h {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .f-a {
-            align-items: center;
-        }
-
-        .f-j {
-            justify-content: center;
-        }
-
-        .full-width {
-            width: 100%;
-        }
-
-        .full-height {
-            min-height: 100%;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        #loading span {
-            font-family: monospace;
-            font-size: 1.5em;
-        }
-
-        nav {
-            background-color: #34373c;
-            border-right: 2px solid #16181C;
-            width: 18em;
-            margin: 0;
-            padding: 0;
-            padding-left: 2em;
-            padding-top: 2em;
-            font-weight: bold;
-            font-size: 1.25em;
-        }
-
-        h2 {
-            color: white;
-            font-size: 1em;
-        }
-
-        nav ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-        }
-
-        .moroboxai-player {
-            background-color: black;
-            background-size: cover;
-            width: 512px;
-            height: 304px;
-            margin-bottom: 2em;
-        }
-
-        .ai-panel textarea {
-            margin-top: 1em;
-        }
-
-        .ai-panel + .ai-panel {
-            margin-left: 1em;
-        }
-
-        .ai-panel input + input {
-            margin-left: 1em;
-        }
-    </style>
 </html>
