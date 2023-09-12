@@ -45,18 +45,14 @@ jobs:
           CI: true
       - name: Pack
         run: |
-          mkdir -v -p build/web/node_modules/moroboxai-game-sdk/lib/umd
-          mkdir -v -p build/web/node_modules/moroboxai-player-sdk/lib/umd
           mkdir -v -p build/web/lib/umd
           mkdir -v -p build/web/node_modules/moroboxai-editor-sdk/lib/umd
           mkdir -v -p build/web/node_modules/moroboxai-editor-web/lib/umd
           mkdir -v -p build/web/lib/umd
-          cp node_modules/moroboxai-game-sdk/lib/umd/moroboxai-game-sdk.js build/web/node_modules/moroboxai-game-sdk/lib/umd/
-          cp node_modules/moroboxai-player-sdk/lib/umd/moroboxai-player-sdk.js build/web/node_modules/moroboxai-player-sdk/lib/umd/
-          cp lib/umd/moroboxai-player-web.js build/web/lib/umd/
+          cp lib/umd/moroboxai-player-web.min.js build/web/lib/umd/
           cp node_modules/moroboxai-editor-sdk/lib/umd/moroboxai-editor-sdk.js build/web/node_modules/moroboxai-editor-sdk/lib/umd/
           cp node_modules/moroboxai-editor-web/lib/umd/moroboxai-editor-web.js build/web/node_modules/moroboxai-editor-web/lib/umd/
-          cp index.html build/web/
+          cp gh-pages/index.html build/web/
           touch build/web/.nojekyll
       - name: Upload Artifact
         if: github.ref == 'refs/heads/main'
