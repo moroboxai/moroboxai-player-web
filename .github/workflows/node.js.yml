@@ -52,6 +52,7 @@ jobs:
           cp lib/umd/moroboxai-player-web.min.js build/web/lib/umd/
           cp node_modules/moroboxai-editor-sdk/lib/umd/moroboxai-editor-sdk.js build/web/node_modules/moroboxai-editor-sdk/lib/umd/
           cp node_modules/moroboxai-editor-web/lib/umd/moroboxai-editor-web.js build/web/node_modules/moroboxai-editor-web/lib/umd/
+          cp index.css build/web/
           cp gh-pages/index.html build/web/
           touch build/web/.nojekyll
       - name: Upload Artifact
