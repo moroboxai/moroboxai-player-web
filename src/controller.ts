@@ -7,7 +7,7 @@ export class InputController implements MoroboxAIPlayerSDK.IInputController {
         left: false,
         right: false,
         up: false,
-        down: false,
+        down: false
     };
 
     private _keyDownListener: (ev: KeyboardEvent) => void;
@@ -17,28 +17,28 @@ export class InputController implements MoroboxAIPlayerSDK.IInputController {
         this._keyDownListener = (ev) => this._onKey(ev, true);
         this._keyUpListener = (ev) => this._onKey(ev, false);
 
-        document.addEventListener('keydown', this._keyDownListener, false);
-        document.addEventListener('keyup', this._keyUpListener, false);
+        document.addEventListener("keydown", this._keyDownListener, false);
+        document.addEventListener("keyup", this._keyUpListener, false);
     }
 
     private _onKey(ev: KeyboardEvent, value: boolean) {
-        if (ev.code === 'ArrowDown' || ev.code === 'KeyS') {
-            if (ev.code === 'ArrowDown') {
+        if (ev.code === "ArrowDown" || ev.code === "KeyS") {
+            if (ev.code === "ArrowDown") {
                 ev.preventDefault();
             }
             this._inputs.down = value;
-        } else if (ev.code === 'ArrowUp' || ev.code === 'KeyW') {
-            if (ev.code === 'ArrowUp') {
+        } else if (ev.code === "ArrowUp" || ev.code === "KeyW") {
+            if (ev.code === "ArrowUp") {
                 ev.preventDefault();
             }
             this._inputs.up = value;
-        } else if (ev.code === 'ArrowLeft' || ev.code === 'KeyA') {
-            if (ev.code === 'ArrowLeft') {
+        } else if (ev.code === "ArrowLeft" || ev.code === "KeyA") {
+            if (ev.code === "ArrowLeft") {
                 ev.preventDefault();
             }
             this._inputs.left = value;
-        } else if (ev.code === 'ArrowRight' || ev.code === 'KeyD') {
-            if (ev.code === 'ArrowRight') {
+        } else if (ev.code === "ArrowRight" || ev.code === "KeyD") {
+            if (ev.code === "ArrowRight") {
                 ev.preventDefault();
             }
             this._inputs.right = value;
@@ -46,8 +46,8 @@ export class InputController implements MoroboxAIPlayerSDK.IInputController {
     }
 
     remove() {
-        document.removeEventListener('keydown', this._keyDownListener);
-        document.removeEventListener('keyup', this._keyUpListener);
+        document.removeEventListener("keydown", this._keyDownListener);
+        document.removeEventListener("keyup", this._keyUpListener);
     }
 
     get inputs(): MoroboxAIGameSDK.IInputs {

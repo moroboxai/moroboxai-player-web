@@ -1,29 +1,31 @@
-import JSZip from 'jszip';
-import * as MoroboxAIGameSDK from 'moroboxai-game-sdk';
+import JSZip from "jszip";
+import * as MoroboxAIGameSDK from "moroboxai-game-sdk";
 
 /**
  * Fetch data from an URL.
- * @param {string} url - Remote URL 
+ * @param {string} url - Remote URL
  * @returns {Promise} Data when ready
  */
 function getUrl(url: string): Promise<string> {
-    return fetch(url).then(response => {
-        if (!response.ok) {
-            return Promise.reject(response.status);
-        }
+    return fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+                return Promise.reject(response.status);
+            }
 
-        return response.blob();
-    }).then(blob => {
-        return blob.text();
-    });
+            return response.blob();
+        })
+        .then((blob) => {
+            return blob.text();
+        });
 }
 
 export abstract class Server implements MoroboxAIGameSDK.IServer {
     ready(callback: () => void): void {
-        throw new Error('Method not implemented.');
+        throw new Error("Method not implemented.");
     }
     close(callback?: (err: any) => void): void {
-        throw new Error('Method not implemented.');
+        throw new Error("Method not implemented.");
     }
 }
 
@@ -39,7 +41,7 @@ export class FileServer extends Server implements MoroboxAIGameSDK.IFileServer {
     href(path: string): string {
         return `${this._baseUrl}/${path}`;
     }
-    
+
     get(path: string): Promise<string> {
         return getUrl(this.href(path));
     }
@@ -66,21 +68,23 @@ export class ZipServer extends Server implements MoroboxAIGameSDK.IFileServer {
 
     constructor(baseUrl: string) {
         super();
-        this._task = getUrl(baseUrl).then(JSZip.loadAsync).then(zip => {
-            if (this._isClosed) {
-                return;
-            }
+        this._task = getUrl(baseUrl)
+            .then(JSZip.loadAsync)
+            .then((zip) => {
+                if (this._isClosed) {
+                    return;
+                }
 
-            this._zip = zip;
-            this._task = undefined;
-            this._notifyReady();
-        });
+                this._zip = zip;
+                this._task = undefined;
+                this._notifyReady();
+            });
     }
 
     href(path: string): string {
         return path;
     }
-    
+
     get(path: string): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             if (this._zip === undefined) {
@@ -93,10 +97,12 @@ export class ZipServer extends Server implements MoroboxAIGameSDK.IFileServer {
                 reject(undefined);
                 return;
             }
-            
-            file.async('string').then(data => {
-                resolve(data);
-            }).catch(reject);
+
+            file.async("string")
+                .then((data) => {
+                    resolve(data);
+                })
+                .catch(reject);
         });
     }
 
