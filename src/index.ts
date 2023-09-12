@@ -2,8 +2,6 @@ import * as MoroboxAIPlayerSDK from "moroboxai-player-sdk";
 import { InputController } from "./controller";
 import { FileServer, ZipServer } from "./server";
 
-export { IPlayer } from "moroboxai-player-sdk";
-
 /**
  * Version of the game SDK.
  */
@@ -17,7 +15,7 @@ export { VERSION as PLAYER_SDK_VERSION } from "moroboxai-player-sdk";
 /**
  * Version of the player.
  */
-export const VERSION: string = "0.1.0-alpha.22";
+export const VERSION: string = "0.1.0-alpha.23";
 
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
     inputController: () => new InputController(),

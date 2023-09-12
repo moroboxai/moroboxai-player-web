@@ -2,16 +2,12 @@
 
 <head>
     <title>MoroboxAIPlayer Sample</title>
-    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-game-sdk@latest/lib/umd/moroboxai-game-sdk.min.js in production -->
-    <script type="text/javascript" src="./node_modules/moroboxai-game-sdk/lib/umd/moroboxai-game-sdk.js"></script>
-    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-player-sdk@latest/lib/umd/moroboxai-player-sdk.min.js in production -->
-    <script type="text/javascript" src="./node_modules/moroboxai-player-sdk/lib/umd/moroboxai-player-sdk.js"></script>
-    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-player-web@latest/lib/umd/moroboxai-player-web.min.js in production -->
-    <script type="text/javascript" src="./lib/umd/moroboxai-player-web.js"></script>
     <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-editor-sdk@latest/lib/umd/moroboxai-editor-sdk.min.js in production -->
     <script type="text/javascript" src="./node_modules/moroboxai-editor-sdk/lib/umd/moroboxai-editor-sdk.js"></script>
     <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-editor-web@latest/lib/umd/moroboxai-editor-web.min.js in production -->
     <script type="text/javascript" src="./node_modules/moroboxai-editor-web/lib/umd/moroboxai-editor-web.js"></script>
+    <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-player-web@latest/lib/umd/moroboxai-player-web.min.js in production -->
+    <script type="module" src="./src/index.ts"></script>
     <!-- For running the sample game -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/piximoroxel8ai@0.1.0-alpha.3/lib/umd/piximoroxel8ai.js"></script>
 </head>
@@ -29,10 +25,12 @@
         <div>moroboxai-editor-web v<span id="moroboxai-editor-web-version"></span></div>
     </div>
 </body>
-<script type="text/javascript">
+<script type="module">
+    import * as MoroboxAIPlayer from "./src/index.ts";
+    
     (function () {
-        document.getElementById("moroboxai-game-sdk-version").innerText = MoroboxAIGameSDK.VERSION;
-        document.getElementById("moroboxai-player-sdk-version").innerText = MoroboxAIPlayerSDK.VERSION;
+        document.getElementById("moroboxai-game-sdk-version").innerText = MoroboxAIPlayer.GAME_SDK_VERSION;
+        document.getElementById("moroboxai-player-sdk-version").innerText = MoroboxAIPlayer.PLAYER_SDK_VERSION;
         document.getElementById("moroboxai-player-web-version").innerText = MoroboxAIPlayer.VERSION;
         document.getElementById("moroboxai-editor-sdk-version").innerText = MoroboxAIEditorSDK.VERSION;
         document.getElementById("moroboxai-editor-web-version").innerText = MoroboxAIEditor.VERSION;
