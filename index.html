@@ -2,12 +2,13 @@
 
 <head>
     <title>MoroboxAIPlayer Sample</title>
+    <link rel="stylesheet" href="index.css">
     <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-editor-sdk@latest/lib/umd/moroboxai-editor-sdk.min.js in production -->
     <script type="text/javascript" src="./node_modules/moroboxai-editor-sdk/lib/umd/moroboxai-editor-sdk.js"></script>
     <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-editor-web@latest/lib/umd/moroboxai-editor-web.min.js in production -->
     <script type="text/javascript" src="./node_modules/moroboxai-editor-web/lib/umd/moroboxai-editor-web.js"></script>
     <!-- Use https://cdn.jsdelivr.net/npm/moroboxai-player-web@latest/lib/umd/moroboxai-player-web.min.js in production -->
-    <script type="text/javascript" src="./node_modules/moroboxai-player-web/lib/umd/moroboxai-player-web.min.js"></script>
+    <script type="text/javascript" src="./lib/umd/moroboxai-player-web.min.js"></script>
     <!-- For running the sample game -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/piximoroxel8ai@0.1.0-alpha.3/lib/umd/piximoroxel8ai.js"></script>
 </head>
@@ -56,41 +57,5 @@
         })
     })();
 </script>
-
-<style type="text/css">
-    body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .vertical {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .horizontal {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #player {
-        background-color: black;
-        background-size: cover;
-        width: 256px;
-        height: 256px;
-        margin-left: 10em;
-        margin-right: 2em;
-    }
-
-    #info {
-        margin-top: 2em;
-        text-align: center;
-    }
-</style>
 
 </html>
