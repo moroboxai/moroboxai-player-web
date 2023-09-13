@@ -1,24 +1,7 @@
 import JSZip from "jszip";
 import * as MoroboxAIGameSDK from "moroboxai-game-sdk";
-
-/**
- * Fetch data from an URL.
- * @param {string} url - Remote URL
- * @returns {Promise} Data when ready
- */
-function getUrl(url: string): Promise<string> {
-    return fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                return Promise.reject(response.status);
-            }
-
-            return response.blob();
-        })
-        .then((blob) => {
-            return blob.text();
-        });
-}
+import { getUrl } from "moroboxai-player-sdk/src/server";
+export { FetchFileServer } from "moroboxai-player-sdk/src/server";
 
 export abstract class Server implements MoroboxAIGameSDK.IServer {
     ready(callback: () => void): void {
@@ -26,36 +9,6 @@ export abstract class Server implements MoroboxAIGameSDK.IServer {
     }
     close(callback?: (err: any) => void): void {
         throw new Error("Method not implemented.");
-    }
-}
-
-// Serve files from remote URL
-export class FileServer extends Server implements MoroboxAIGameSDK.IFileServer {
-    private _baseUrl: string;
-
-    constructor(baseUrl: string) {
-        super();
-        this._baseUrl = baseUrl;
-    }
-
-    href(path: string): string {
-        return `${this._baseUrl}/${path}`;
-    }
-
-    get(path: string): Promise<string> {
-        return getUrl(this.href(path));
-    }
-
-    ready(callback: () => void): void {
-        if (callback) {
-            callback();
-        }
-    }
-
-    close(callback?: (err: any) => void): void {
-        if (callback) {
-            callback(null);
-        }
     }
 }
 
