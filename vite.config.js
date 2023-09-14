@@ -16,6 +16,12 @@ export default defineConfig({
                         return `umd/moroboxai-player-web.min.js`;
                 }
             }
+        },
+        rollupOptions: {
+            input: {
+                main: "./index.html"
+            }
         }
-    }
+    },
+    base: "/moroboxai-player-web/"
 });

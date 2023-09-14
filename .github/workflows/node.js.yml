@@ -47,8 +47,7 @@ jobs:
         run: |
           mkdir -v -p build/web/lib/umd
           cp lib/umd/moroboxai-player-web.min.js build/web/lib/umd/
-          cp index.css build/web/
-          cp gh-pages/index.html build/web/
+          cp index.html build/web/
           touch build/web/.nojekyll
       - name: Upload Artifact
         if: github.ref == 'refs/heads/main'
