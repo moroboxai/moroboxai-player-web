@@ -20,42 +20,47 @@ npm install moroboxai-player-web --save
 
 ```html
 <html>
- <div id="player"></div> 
-  
- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moroboxai-player-web/lib/umd/moroboxai-player-web.min.js"></script>
- <script type="text/javascript">
-  // Initialize the player on our div
-  const player = MoroboxAIPlayer.init({
-   element: document.getElementById("player"),
-   url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pong/",
-   splashart: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pong/assets/splashart.png",
-   width: 256,
-   height: 256
-  });
+    <div id="player"></div>
 
-  // Will be called when the game is ready
-  player.onReady = () => console.log("game is loaded and ready");
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/moroboxai-player-web/lib/umd/moroboxai-player-web.min.js"
+    ></script>
+    <script type="text/javascript">
+        // Initialize the player on our div
+        const player = MoroboxAIPlayer.init({
+            element: document.getElementById("player"),
+            url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pong/",
+            splashart:
+                "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/games/pong/assets/splashart.png",
+            width: 256,
+            height: 256
+        });
 
-  // Optionally start the game
-  player.play();
- </script>
+        // Will be called when the game is ready
+        player.onReady = () => console.log("game is loaded and ready");
+
+        // Optionally start the game
+        player.play();
+    </script>
 </html>
 ```
 
 ## Arguments
 
-| Name   |      Type      |  Default |  Description |
-|:----------|:-------------|:------|:------|
-| element | Element || DOM element to attach the player to |
-| url | string || URL of the game |
-| header | object || Game header |
-| splashart | string || URL of the placeholder image displayed before the game is loaded |
-| width | number || Width of the `div` element |
-| height | number || Height of the `div` element |
-| resizable | boolean | true | If the game can resize the player |
-| autoPlay | boolean | false | Auto play the game after the player is initialized |
-| speed | number | 1 | Speed of the game |
-| onReady | func | noop | **Signature: function() => void** <br/> Function called when the game is loaded and ready |
+| Name      | Type    | Default | Description                                                                               |
+| :-------- | :------ | :------ | :---------------------------------------------------------------------------------------- |
+| element   | Element |         | DOM element to attach the player to                                                       |
+| url       | string  |         | URL of the game                                                                           |
+| header    | object  |         | Game header                                                                               |
+| splashart | string  |         | URL of the placeholder image displayed before the game is loaded                          |
+| width     | number  |         | Width of the `div` element                                                                |
+| height    | number  |         | Height of the `div` element                                                               |
+| resizable | boolean | true    | If the game can resize the player                                                         |
+| autoPlay  | boolean | false   | Auto play the game after the player is initialized                                        |
+| speed     | number  | 1       | Speed of the game                                                                         |
+| agents    | array   |         | Agents to load into controllers                                                           |
+| onReady   | func    | noop    | **Signature: function() => void** <br/> Function called when the game is loaded and ready |
 
 ## Pause
 
