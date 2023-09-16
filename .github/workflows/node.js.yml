@@ -45,9 +45,7 @@ jobs:
           CI: true
       - name: Pack
         run: |
-          mkdir -v -p build/web/umd
-          cp lib/umd/moroboxai-player-web.min.js build/web/umd/
-          cp lib/index.html build/web/
+          cp -r dist/** build/web/
           touch build/web/.nojekyll
       - name: Upload Artifact
         if: github.ref == 'refs/heads/main'
