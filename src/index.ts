@@ -2,7 +2,18 @@ import * as MoroboxAIPlayerSDK from "moroboxai-player-sdk";
 import { InputController } from "./controller";
 import { FetchFileServer, ZipServer } from "./server";
 
-export type { IPlayer } from "moroboxai-player-sdk";
+export type {
+    SupportedAgentLanguage,
+    IAgentOptions,
+    IAgent,
+    IInputController,
+    IController,
+    IPlayer,
+    IPlayerOptions,
+    IMetaPlayer
+} from "moroboxai-player-sdk";
+
+export { MetaPlayer } from "moroboxai-player-sdk";
 
 /**
  * Version of the game SDK.
@@ -17,7 +28,7 @@ export { VERSION as PLAYER_SDK_VERSION } from "moroboxai-player-sdk";
 /**
  * Version of the player.
  */
-export const VERSION: string = "0.1.0-alpha.27";
+export const VERSION: string = "0.1.0-alpha.28";
 
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
     inputController: () => new InputController(),
