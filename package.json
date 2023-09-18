@@ -32,6 +32,6 @@
     },
     "dependencies": {
         "jszip": "^3.9.1",
-        "moroboxai-player-sdk": "^0.1.0-alpha.31"
+        "moroboxai-player-sdk": "^0.1.0-alpha.32"
     }
 }
