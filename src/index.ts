@@ -28,7 +28,7 @@ export { VERSION as PLAYER_SDK_VERSION } from "moroboxai-player-sdk";
 /**
  * Version of the player.
  */
-export const VERSION: string = "0.1.0-alpha.29";
+export const VERSION: string = "0.1.0-alpha.30";
 
 const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
     inputController: () => new InputController(),
