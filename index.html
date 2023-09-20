@@ -1,16 +1,6 @@
 <html>
     <head>
         <title>MoroboxAIPlayerWeb Sample</title>
-        <!-- For the editor -->
-        <script
-            type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/moroboxai-editor-web@latest/lib/umd/moroboxai-editor-web.min.js"
-        ></script>
-        <!-- For running the sample game -->
-        <script
-            type="module"
-            src="https://cdn.jsdelivr.net/npm/piximoroxel8ai@latest/lib/umd/piximoroxel8ai.min.js"
-        ></script>
     </head>
 
     <body class="vertical">
@@ -18,7 +8,11 @@
             <div id="player"></div>
             <div id="editor"></div>
         </div>
-        <div id="info">
+        <div class="info horizontal">
+            <button id="attach-player"></button>
+            <button id="attach-editor"></button>
+        </div>
+        <div class="info">
             <div>
                 moroboxai-game-sdk v<span
                     id="moroboxai-game-sdk-version"
@@ -47,6 +41,7 @@
         </div>
     </body>
     <script type="module">
+        import * as MoroboxAIEditor from "moroboxai-editor-web";
         import * as MoroboxAIPlayer from "./src/index.ts";
 
         document.getElementById("moroboxai-game-sdk-version").innerText =
@@ -56,37 +51,75 @@
         document.getElementById("moroboxai-player-web-version").innerText =
             MoroboxAIPlayer.VERSION;
         document.getElementById("moroboxai-editor-sdk-version").innerText =
-            MoroboxAIEditor.SDK_VERSION;
+            MoroboxAIEditor.EDITOR_SDK_VERSION;
         document.getElementById("moroboxai-editor-web-version").innerText =
             MoroboxAIEditor.VERSION;
 
-        const player = MoroboxAIPlayer.init(document.getElementById("player"), {
-            // Replace with URL to your header.yml
-            url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/piximoroxel8ai-sample/sample/header.yml",
-            resizable: false,
-            autoPlay: true,
-            width: 256,
-            height: 256,
-            agents: [
-                {
-                    url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/piximoroxel8ai-sample/sample/agent.js"
-                }
-            ],
-            onReady: () => console.log("ready")
-        });
+        let player = null;
+        let editor = null;
+        const attachPlayerButton = document.getElementById("attach-player");
+        const attachEditorButton = document.getElementById("attach-editor");
 
-        MoroboxAIEditor.init({
-            element: document.getElementById("editor"),
-            url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/piximoroxel8ai-sample/sample/agent.js",
-            width: "500px",
-            height: "400px",
-            onLoad: (language, value) =>
-                player.getController(0).loadAgent({
-                    language: language,
-                    code: value
-                }),
-            onUnload: () => player.getController(0).unloadAgent()
-        });
+        function attachPlayer() {
+            if (player === null) {
+                // Attach player to the DOM
+                player = MoroboxAIPlayer.init(
+                    // Root element of the player
+                    document.getElementById("player"),
+                    // Options for the player
+                    {
+                        url: "https://raw.githubusercontent.com/moroboxai/create-moroboxai-game/master/examples/canvas2d-rgb/header-js.yml",
+                        resizable: true,
+                        autoPlay: true,
+                        scale: 1,
+                        agents: [
+                            {
+                                url: "https://raw.githubusercontent.com/moroboxai/create-moroboxai-game/master/examples/canvas2d-rgb/agent.js"
+                            }
+                        ],
+                        onReady: () => console.log("ready")
+                    }
+                );
+
+                attachPlayerButton.textContent = "Detach Player";
+            } else {
+                // Remove player from DOM
+                player.remove();
+                player = null;
+                attachPlayerButton.textContent = "Attach Player";
+            }
+        }
+
+        function attachEditor() {
+            if (editor === null) {
+                // Attach editor to the DOM
+                editor = MoroboxAIEditor.init({
+                    // Root element of the editor
+                    element: document.getElementById("editor"),
+                    url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/piximoroxel8ai-sample/sample/agent.js",
+                    width: "500px",
+                    height: "400px",
+                    onLoad: (language, value) =>
+                        player.getController(0).loadAgent({
+                            language: language,
+                            code: value
+                        }),
+                    onUnload: () => player.getController(0).unloadAgent()
+                });
+
+                attachEditorButton.textContent = "Detach Editor";
+            } else {
+                // Remove editor from DOM
+                editor.remove();
+                editor = null;
+                attachEditorButton.textContent = "Attach Editor";
+            }
+        }
+
+        attachPlayerButton.onclick = () => attachPlayer();
+        attachEditorButton.onclick = () => attachEditor();
+        attachPlayer();
+        attachEditor();
     </script>
 
     <style>
@@ -117,9 +150,13 @@
             margin-right: 2em;
         }
 
-        #info {
+        .info {
             margin-top: 2em;
             text-align: center;
+        }
+
+        .info button ~ button {
+            margin-left: 1em;
         }
     </style>
 </html>
