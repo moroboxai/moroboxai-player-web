@@ -65,11 +65,6 @@
                         resizable: true,
                         autoPlay: true,
                         scale: 1,
-                        agents: [
-                            {
-                                url: "https://raw.githubusercontent.com/moroboxai/create-moroboxai-game/master/examples/canvas2d-rgb/agent.js"
-                            }
-                        ],
                         onReady: () => console.log("ready")
                     }
                 );
@@ -89,7 +84,7 @@
                 editor = MoroboxAIEditor.init({
                     // Root element of the editor
                     element: document.getElementById("editor"),
-                    url: "https://raw.githubusercontent.com/moroboxai/moroboxai-games/master/piximoroxel8ai-sample/sample/agent.js",
+                    url: "https://raw.githubusercontent.com/moroboxai/create-moroboxai-game/master/examples/canvas2d-rgb/agent.js",
                     width: "500px",
                     height: "400px",
                     onLoad: (language, value) =>
