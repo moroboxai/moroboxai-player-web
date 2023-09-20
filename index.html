@@ -1,17 +1,7 @@
 <html>
     <head>
         <title>MoroboxAIPlayerWeb Sample</title>
-        <!-- For the editor -->
-        <script
-            type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/moroboxai-editor-web@latest/lib/umd/moroboxai-editor-web.min.js"
-        ></script>
-        <!-- For running the sample game -->
-        <script
-            type="module"
-            src="https://cdn.jsdelivr.net/npm/piximoroxel8ai@latest/lib/umd/piximoroxel8ai.min.js"
-        ></script>
-      <script type="module" crossorigin src="/moroboxai-player-web/assets/index.b19b0a13.js"></script>
+      <script type="module" crossorigin src="/moroboxai-player-web/assets/index-057dafc6.js"></script>
     </head>
 
     <body class="vertical">
@@ -19,7 +9,11 @@
             <div id="player"></div>
             <div id="editor"></div>
         </div>
-        <div id="info">
+        <div class="info horizontal">
+            <button id="attach-player"></button>
+            <button id="attach-editor"></button>
+        </div>
+        <div class="info">
             <div>
                 moroboxai-game-sdk v<span
                     id="moroboxai-game-sdk-version"
@@ -77,9 +71,13 @@
             margin-right: 2em;
         }
 
-        #info {
+        .info {
             margin-top: 2em;
             text-align: center;
+        }
+
+        .info button ~ button {
+            margin-left: 1em;
         }
     </style>
 </html>
