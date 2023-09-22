@@ -3,7 +3,7 @@ import { InputController } from "./controller";
 import { FetchFileServer, ZipServer } from "./server";
 
 export type {
-    SupportedAgentLanguage,
+    AgentLanguage,
     IAgentOptions,
     IAgent,
     IInputController,
