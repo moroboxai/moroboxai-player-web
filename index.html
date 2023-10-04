@@ -51,7 +51,21 @@
                         resizable: true,
                         autoPlay: true,
                         scale: 1,
-                        onReady: () => console.log("ready")
+                        onReady: () => console.log("ready"),
+                        plugins: [
+                            {
+                                name: "logger",
+                                loadHeader: (options) => {
+                                    console.log(
+                                        "loaded header from plugin",
+                                        options.header
+                                    );
+                                    return new Promise((resolve) => {
+                                        return resolve(options.header);
+                                    });
+                                }
+                            }
+                        ]
                     }
                 );
 
