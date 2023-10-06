@@ -1,9 +1,9 @@
-import * as MoroboxAIGameSDK from "moroboxai-game-sdk";
+import type { Inputs } from "moroboxai-game-sdk";
 import * as MoroboxAIPlayerSDK from "moroboxai-player-sdk";
 
 // Controller for handling player inputs
 export class InputController implements MoroboxAIPlayerSDK.IInputController {
-    private _inputs: MoroboxAIGameSDK.IInputs = {
+    private _inputs: Inputs = {
         left: false,
         right: false,
         up: false,
@@ -50,7 +50,7 @@ export class InputController implements MoroboxAIPlayerSDK.IInputController {
         document.removeEventListener("keyup", this._keyUpListener);
     }
 
-    get inputs(): MoroboxAIGameSDK.IInputs {
+    get inputs(): Inputs {
         return this._inputs;
     }
 }

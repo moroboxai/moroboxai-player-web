@@ -2,19 +2,6 @@ import * as MoroboxAIPlayerSDK from "moroboxai-player-sdk";
 import { InputController } from "./controller";
 import { FetchFileServer, ZipServer } from "./server";
 
-export type {
-    AgentLanguage,
-    IAgentOptions,
-    IAgent,
-    IInputController,
-    IController,
-    IPlayer,
-    IPlayerOptions,
-    IMetaPlayer
-} from "moroboxai-player-sdk";
-
-export { MetaPlayer } from "moroboxai-player-sdk";
-
 /**
  * Version of the game SDK.
  */
