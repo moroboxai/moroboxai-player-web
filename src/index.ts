@@ -25,9 +25,9 @@ const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
 
 /**
  * Get default configured player options.
- * @returns {IPlayerOptions} Default options
+ * @returns {PlayerOptions} Default options
  */
-export function defaultOptions(): MoroboxAIPlayerSDK.IPlayerOptions {
+export function defaultOptions(): MoroboxAIPlayerSDK.PlayerOptions {
     return MoroboxAIPlayerSDK.defaultOptions();
 }
 
@@ -35,7 +35,7 @@ export function init():
     | MoroboxAIPlayerSDK.IPlayer
     | MoroboxAIPlayerSDK.IPlayer[];
 export function init(
-    options: MoroboxAIPlayerSDK.IPlayerOptions
+    options: MoroboxAIPlayerSDK.PlayerOptions
 ): MoroboxAIPlayerSDK.IPlayer | MoroboxAIPlayerSDK.IPlayer[];
 export function init(element: Element): MoroboxAIPlayerSDK.IPlayer;
 export function init(
@@ -43,33 +43,33 @@ export function init(
 ): MoroboxAIPlayerSDK.IPlayer[];
 export function init(
     element: Element,
-    options: MoroboxAIPlayerSDK.IPlayerOptions
+    options: MoroboxAIPlayerSDK.PlayerOptions
 ): MoroboxAIPlayerSDK.IPlayer;
 export function init(
     element: Element[] | HTMLCollectionOf<Element>,
-    options: MoroboxAIPlayerSDK.IPlayerOptions
+    options: MoroboxAIPlayerSDK.PlayerOptions
 ): MoroboxAIPlayerSDK.IPlayer[];
 export function init(
     element?:
-        | MoroboxAIPlayerSDK.IPlayerOptions
+        | MoroboxAIPlayerSDK.PlayerOptions
         | Element
         | Element[]
         | HTMLCollectionOf<Element>,
-    options?: MoroboxAIPlayerSDK.IPlayerOptions
+    options?: MoroboxAIPlayerSDK.PlayerOptions
 ): MoroboxAIPlayerSDK.IPlayer | MoroboxAIPlayerSDK.IPlayer[];
 
 /**
  * Initialize player on one or multiple HTML elements.
  * @param {HTMLElement} element Element to wrap
- * @param {IPlayerOptions} options Options for initializing the player
+ * @param {PlayerOptions} options Options for initializing the player
  */
 export function init(
     element?:
-        | MoroboxAIPlayerSDK.IPlayerOptions
+        | MoroboxAIPlayerSDK.PlayerOptions
         | Element
         | Element[]
         | HTMLCollectionOf<Element>,
-    options?: MoroboxAIPlayerSDK.IPlayerOptions
+    options?: MoroboxAIPlayerSDK.PlayerOptions
 ): MoroboxAIPlayerSDK.IPlayer | MoroboxAIPlayerSDK.IPlayer[] {
     return MoroboxAIPlayerSDK.init(sdkConfig, element, options);
 }
