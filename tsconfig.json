@@ -14,12 +14,15 @@
         "stripInternal": true,
         "lib": ["es5", "es6", "dom"],
         "paths": {
-            "*": [
-                "node_modules/*"
-            ]
-        }
+            "*": ["node_modules/*"],
+            "@/*": ["./src/*", "./lib/*"]
+        },
+        "plugins": [
+            {
+                "transform": "typescript-transform-paths",
+                "afterDeclarations": true
+            }
+        ]
     },
-    "include": [
-        "src/**/*"
-    ]
+    "include": ["src/**/*"]
 }
