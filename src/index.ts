@@ -17,7 +17,7 @@ export { VERSION as PLAYER_SDK_VERSION } from "moroboxai-player-sdk";
  */
 export const VERSION: string = "__VERSION__";
 
-const sdkConfig: MoroboxAIPlayerSDK.ISDKConfig = {
+const sdkConfig: MoroboxAIPlayerSDK.SDKConfig = {
     inputController: () => new InputController(),
     fileServer: (baseUrl: string) => new FetchFileServer(baseUrl),
     zipServer: (baseUrl: string) => new ZipServer(baseUrl)
