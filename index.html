@@ -96,9 +96,8 @@
                     url: "https://raw.githubusercontent.com/moroboxai/create-moroboxai-game/master/examples/canvas2d-rgb/agent.*",
                     width: "500px",
                     height: "400px",
-                    onRun: (options) =>
-                        player.getController(0).loadAgent(options),
-                    onStop: () => player.getController(0).unloadAgent()
+                    onRun: (options) => player.loadAgent(0, options),
+                    onStop: () => player.unloadAgent(0)
                 });
 
                 attachEditorButton.textContent = "Detach Editor";
