@@ -14,14 +14,18 @@ export abstract class Server implements MoroboxAIGameSDK.IServer {
 
 // Serve files from remote zip
 export class ZipServer extends Server implements MoroboxAIGameSDK.IFileServer {
+    private _url: string;
+    private _baseUrl: string;
     private _task?: Promise<void>;
     private _zip?: JSZip = undefined;
     private _readyCallback?: () => void;
     private _isClosed: boolean = false;
 
-    constructor(baseUrl: string) {
+    constructor(url: string) {
         super();
-        this._task = getUrl(baseUrl)
+        this._url = url;
+        this._baseUrl = url.substring(0, url.lastIndexOf("/"));
+        this._task = getUrl(url)
             .then(JSZip.loadAsync)
             .then((zip) => {
                 if (this._isClosed) {
@@ -32,6 +36,14 @@ export class ZipServer extends Server implements MoroboxAIGameSDK.IFileServer {
                 this._task = undefined;
                 this._notifyReady();
             });
+    }
+
+    get url(): string {
+        return this._url;
+    }
+
+    get baseUrl(): string {
+        return this._baseUrl;
     }
 
     href(path: string): string {

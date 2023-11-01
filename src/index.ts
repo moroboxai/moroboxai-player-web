@@ -1,5 +1,6 @@
+import * as MoroboxAIGameSDK from "moroboxai-game-sdk";
 import * as MoroboxAIPlayerSDK from "moroboxai-player-sdk";
-import { InputController } from "./controller";
+import { InputDevice } from "./controller";
 import { FetchFileServer, ZipServer } from "./server";
 
 /**
@@ -18,9 +19,14 @@ export { VERSION as PLAYER_SDK_VERSION } from "moroboxai-player-sdk";
 export const VERSION: string = "__VERSION__";
 
 const sdkConfig: MoroboxAIPlayerSDK.SDKConfig = {
-    inputController: () => new InputController(),
-    fileServer: (baseUrl: string) => new FetchFileServer(baseUrl),
-    zipServer: (baseUrl: string) => new ZipServer(baseUrl)
+    inputDeviceFactory: () => new InputDevice(),
+    fileServerFactory: (url: string): MoroboxAIGameSDK.IFileServer => {
+        if (url.endsWith(".zip")) {
+            return new ZipServer(url);
+        }
+
+        return new FetchFileServer(url);
+    }
 };
 
 /**

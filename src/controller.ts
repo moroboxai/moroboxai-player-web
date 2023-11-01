@@ -1,8 +1,8 @@
 import type { Inputs } from "moroboxai-game-sdk";
 import * as MoroboxAIPlayerSDK from "moroboxai-player-sdk";
 
-// Controller for handling player inputs
-export class InputController implements MoroboxAIPlayerSDK.IInputController {
+// Handle player inputs
+export class InputDevice implements MoroboxAIPlayerSDK.IInputDevice {
     private _inputs: Inputs = {
         left: false,
         right: false,
